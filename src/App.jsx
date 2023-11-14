@@ -1,6 +1,8 @@
 import { useState } from 'react';
 
-import Entry from './components/Entry';
+import SearchForm from './components/SearchForm';
+import AddForm from './components/AddForm';
+import Entries from './components/Entries';
 
 export default function App() {
   const [entries, setEntries] = useState([
@@ -57,40 +59,17 @@ export default function App() {
       </div>
       <div>
         <h2>Search for an entry by name</h2>
-        <label htmlFor="search">Search: </label>
-        <input id="search" onChange={handleSearchChange}></input>
-        <ul>
-          {results ? results.map((result) => 
-            <Entry key={result.name} entry={result} />): ''}
-        </ul>
+        <SearchForm results={results} handleSearchChange={handleSearchChange} />
       </div>
       <div>
         <h2>Add an entry</h2>
-        <form onSubmit={addEntry}>
-          <div>
-            <label htmlFor="name">Name: </label>
-            <input 
-              id="name" value={newName} onChange={handleNameChange} required>
-            </input>
-            <br />
-            <label htmlFor="number">Number: </label>
-            <input 
-              id="number" value={newNumber} onChange={handleNumberChange} 
-                required>
-            </input>
-          </div>
-          <div>
-            <button type="submit">add</button>
-          </div>
-        </form>
+        <AddForm addEntry={addEntry} newName={newName} 
+          handleNameChange={handleNameChange} newNumber={newNumber} 
+            handleNumberChange={handleNumberChange} />
       </div>
       <div>
         <h2>Numbers</h2>
-        <ul>
-          {entries.map((entry) => 
-            <Entry key={entry.name} entry={entry} />
-          )}
-        </ul>
+        <Entries entries={entries} />
       </div>
     </div>
   );
