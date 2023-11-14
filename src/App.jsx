@@ -8,12 +8,28 @@ export default function App() {
   ]);
   const [newName, setNewName] = useState('');
 
+  function addEntry(event) {
+    event.preventDefault();
+    const entryObject = {
+      name: newName
+    }
+    setPersons(persons.concat(entryObject));
+    setNewName('');
+  }
+
+  function handleEntryChange(event) {
+    setNewName(event.target.value);
+  }
+
   return (
     <div>
       <h2>Phonebook</h2>
-      <form>
+      <form onSubmit={addEntry}>
         <div>
-          name: <input />
+          <label htmlFor="name">Name: </label>
+          <input 
+            id="name" value={newName} onChange={handleEntryChange}>
+          </input>
         </div>
         <div>
           <button type="submit">add</button>
