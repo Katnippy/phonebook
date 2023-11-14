@@ -84,8 +84,8 @@ export default function App() {
       <div>
         <h2>Numbers</h2>
         <ul>
-          {entries.map((person) => 
-            <Entry key={person.name} entry={person} />
+          {entries.map((entry) => 
+            <Entry key={entry.name} entry={entry} />
           )}
         </ul>
       </div>
