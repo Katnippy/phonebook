@@ -3,26 +3,36 @@ import { useState } from 'react';
 import Entry from './components/Entry';
 
 export default function App() {
-  const [persons, setPersons] = useState([
-    { name: 'Pingu' }
+  const [entries, setEntries] = useState([
+    { name: 'Pingu', number: '02086876000' }
   ]);
   const [newName, setNewName] = useState('');
+  const [newNumber, setNewNumber] = useState('');
 
   function addEntry(event) {
     event.preventDefault();
-    if (!persons.some((person) => person.name === newName)) {
+    if (!entries.some((entry) => entry.name === newName) && 
+      !entries.some((entry) => entry.number === newNumber)) {
       const entryObject = {
-        name: newName
-      }
-      setPersons(persons.concat(entryObject));
+        name: newName,
+        number: newNumber
+      };
+      setEntries(entries.concat(entryObject));
       setNewName('');
-    } else {
+      setNewNumber('');
+    } else if (entries.some((entry) => entry.name === newName)) {
       alert(`${newName} has already been added to the phonebook!`);
+    } else {
+      alert(`${newNumber} has already been added to the phonebook!`);
     }
   }
 
-  function handleEntryChange(event) {
+  function handleNameChange(event) {
     setNewName(event.target.value);
+  }
+
+  function handleNumberChange(event) {
+    setNewNumber(event.target.value);
   }
 
   return (
@@ -32,7 +42,13 @@ export default function App() {
         <div>
           <label htmlFor="name">Name: </label>
           <input 
-            id="name" value={newName} onChange={handleEntryChange}>
+            id="name" value={newName} onChange={handleNameChange} required>
+          </input>
+          <br />
+          <label htmlFor="number">Number: </label>
+          <input 
+            id="number" value={newNumber} onChange={handleNumberChange} 
+              required>
           </input>
         </div>
         <div>
@@ -41,7 +57,7 @@ export default function App() {
       </form>
       <h2>Numbers</h2>
       <ul>
-        {persons.map((person) => 
+        {entries.map((person) => 
           <Entry key={person.name} entry={person} />
         )}
       </ul>
