@@ -10,11 +10,15 @@ export default function App() {
 
   function addEntry(event) {
     event.preventDefault();
-    const entryObject = {
-      name: newName
+    if (!persons.some((person) => person.name === newName)) {
+      const entryObject = {
+        name: newName
+      }
+      setPersons(persons.concat(entryObject));
+      setNewName('');
+    } else {
+      alert(`${newName} has already been added to the phonebook!`);
     }
-    setPersons(persons.concat(entryObject));
-    setNewName('');
   }
 
   function handleEntryChange(event) {
