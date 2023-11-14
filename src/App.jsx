@@ -16,8 +16,12 @@ export default function App() {
   const [results, setResults] = useState('');
 
   function handleSearchChange(event) {
-    setResults(entries.filter((entry) => 
-      entry.name.toLowerCase().includes(event.target.value.toLowerCase())));
+    if (event.target.value != '') {
+      setResults(entries.filter((entry) => 
+        entry.name.toLowerCase().includes(event.target.value.toLowerCase())));
+    } else {
+      setResults('');
+    }
   }
 
   function addEntry(event) {
@@ -56,9 +60,8 @@ export default function App() {
         <label htmlFor="search">Search: </label>
         <input id="search" onChange={handleSearchChange}></input>
         <ul>
-          {results && results.length !== entries.length ? 
-            results.map((result) => <Entry key={result.name} entry={result} />)
-              : ''}
+          {results ? results.map((result) => 
+            <Entry key={result.name} entry={result} />): ''}
         </ul>
       </div>
       <div>
