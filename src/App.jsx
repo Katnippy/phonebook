@@ -5,14 +5,7 @@ import AddForm from './components/AddForm';
 import Entries from './components/Entries';
 
 export default function App() {
-  const [entries, setEntries] = useState([
-    { name: 'Pingu', number: '02086876000' },
-    { name: 'Piplup', number: '07066775792' },
-    { name: 'Wheezy', number: '07830494624' },
-    { name: 'Tuxedosam', number: '07750295291' },
-    { name: 'Tux', number: '07027167775' },
-    { name: 'Pinga', number: '07034452515' },
-  ]);
+  const [entries, setEntries] = useState([]);
   const [newName, setNewName] = useState('');
   const [newNumber, setNewNumber] = useState('');
   const [results, setResults] = useState('');
