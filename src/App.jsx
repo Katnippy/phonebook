@@ -59,6 +59,24 @@ export default function App() {
     setNewNumber(event.target.value);
   }
 
+  const deleteEntry = (entryToDelete) => {
+    if (window.confirm(`Delete ${entryToDelete.name} from your contacts?`)) {
+      entryService
+        .destroy(entryToDelete.id)
+        .then(() => {
+          const updatedEntries = entries.filter((entry) => 
+            entry.id !== entryToDelete.id);
+          setEntries(updatedEntries);
+        })
+        .catch(() => {
+          alert(
+            `Unable to delete ${entryToDelete.name} - perhaps this contact has` 
+            + ' already been deleted?'
+          );
+        });
+    }
+  };
+
   return (
     <div>
       <div>
@@ -76,7 +94,7 @@ export default function App() {
       </div>
       <div>
         <h2>Numbers</h2>
-        <Entries entries={entries} />
+        <Entries entries={entries} deleteEntry={deleteEntry} />
       </div>
     </div>
   );
