@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 
+import entryService from './services/entries';
 import SearchForm from './components/SearchForm';
 import AddForm from './components/AddForm';
 import Entries from './components/Entries';
@@ -12,10 +12,10 @@ export default function App() {
   const [results, setResults] = useState('');
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/entries')
-      .then(response => {
-        setEntries(response.data);
+    entryService
+      .read()
+      .then(initialEntries => {
+        setEntries(initialEntries);
       });
   }, []);
 
@@ -37,10 +37,10 @@ export default function App() {
         number: newNumber
       };
       setEntries(entries.concat(entryObject));
-      axios
-        .post('http://localhost:3001/entries', entryObject)
-        .then(response => {
-          setEntries(entries.concat(response.data));
+      entryService
+        .create(entryObject)
+        .then(returnedEntry => {
+          setEntries(entries.concat(returnedEntry));
           setNewName('');
           setNewNumber('');
         });
