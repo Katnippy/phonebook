@@ -1,5 +1,5 @@
 {
-  "entries":[
+  "entries": [
     {
       "name": "Pingu",
       "number": "02086876000",
@@ -29,6 +29,11 @@
       "name": "Pinga",
       "number": "07034452515",
       "id": 6
+    },
+    {
+      "name": "Eiscue",
+      "number": "07850490004",
+      "id": 7
     }
   ]
 }

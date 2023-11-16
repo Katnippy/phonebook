@@ -16,7 +16,7 @@ export default function App() {
       .get('http://localhost:3001/entries')
       .then(response => {
         setEntries(response.data);
-      })
+      });
   }, []);
 
   function handleSearchChange(event) {
@@ -37,8 +37,13 @@ export default function App() {
         number: newNumber
       };
       setEntries(entries.concat(entryObject));
-      setNewName('');
-      setNewNumber('');
+      axios
+        .post('http://localhost:3001/entries', entryObject)
+        .then(response => {
+          setEntries(entries.concat(response.data));
+          setNewName('');
+          setNewNumber('');
+        });
     } else if (entries.some((entry) => entry.name === newName)) {
       alert(`${newName} has already been added to the phonebook!`);
     } else {
