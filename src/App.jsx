@@ -28,6 +28,35 @@ export default function App() {
     }
   }
 
+  function clearFields() {
+    setNewName('');
+    setNewNumber('');
+  }
+
+  function replaceEntry() {
+    if (
+      window.confirm(`${newName} has already been added to the phonebook - ` + 
+      'replace their old number with a new one?')
+    ) {
+    const oldEntry = entries.find((entry) => entry.name === newName);
+    const newEntry = { ...oldEntry, number: newNumber };
+    entryService
+      .update(oldEntry.id, newEntry)
+      .then((returnedEntry) => {
+        setEntries(entries.map((entry) => 
+          entry.id !== oldEntry.id ? entry : returnedEntry));
+      })
+      .catch(() => {
+        alert(
+          `Unable to replace ${newName}'s number - perhaps this contact has ` +
+          'been deleted?'
+        );
+      });
+    } else {
+      clearFields();
+    }
+  }
+
   function addEntry(event) {
     event.preventDefault();
     if (!entries.some((entry) => entry.name === newName) && 
@@ -41,11 +70,10 @@ export default function App() {
         .create(entryObject)
         .then(returnedEntry => {
           setEntries(entries.concat(returnedEntry));
-          setNewName('');
-          setNewNumber('');
+          clearFields();
         });
     } else if (entries.some((entry) => entry.name === newName)) {
-      alert(`${newName} has already been added to the phonebook!`);
+      replaceEntry(entries);
     } else {
       alert(`${newNumber} has already been added to the phonebook!`);
     }

@@ -12,8 +12,13 @@ const read = () => {
   return request.then(response => response.data);
 };
 
+const update = (id, entry) => {
+  const request = axios.put(`${baseURL}/${id}`, entry);
+  return request.then(response => response.data);
+};
+
 const destroy = (id) => {
   return axios.delete(`${baseURL}/${id}`);
 };
 
-export default { create, read, destroy };
+export default { create, read, destroy, update };
