@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 
 import entryService from './services/entries';
+import Notification from './components/Notification';
 import SearchForm from './components/SearchForm';
 import AddForm from './components/AddForm';
 import Entries from './components/Entries';
 
 export default function App() {
   const [entries, setEntries] = useState([]);
+  const [notification, setNotification] = useState({});
   const [newName, setNewName] = useState('');
   const [newNumber, setNewNumber] = useState('');
   const [results, setResults] = useState('');
@@ -28,6 +30,13 @@ export default function App() {
     }
   }
 
+  function displayNotification(message, style) {
+    setNotification({ message, style });
+    setTimeout(() => {
+      setNotification({});
+    }, 5000);
+  }
+
   function clearFields() {
     setNewName('');
     setNewNumber('');
@@ -35,7 +44,7 @@ export default function App() {
 
   function replaceEntry() {
     if (
-      window.confirm(`${newName} has already been added to the phonebook - ` + 
+      window.confirm(`${newName} has already been added to your contacts - ` + 
       'replace their old number with a new one?')
     ) {
     const oldEntry = entries.find((entry) => entry.name === newName);
@@ -45,11 +54,14 @@ export default function App() {
       .then((returnedEntry) => {
         setEntries(entries.map((entry) => 
           entry.id !== oldEntry.id ? entry : returnedEntry));
+        displayNotification(
+          `Successfully replaced ${newName}'s number.`, "success"
+        );
       })
       .catch(() => {
-        alert(
+        displayNotification(
           `Unable to replace ${newName}'s number - perhaps this contact has ` +
-          'been deleted?'
+          'been deleted?', "error"
         );
       });
     } else {
@@ -71,11 +83,16 @@ export default function App() {
         .then(returnedEntry => {
           setEntries(entries.concat(returnedEntry));
           clearFields();
+          displayNotification(
+            `Successfully added ${newName} to your contacts.`, "success"
+          );
         });
     } else if (entries.some((entry) => entry.name === newName)) {
       replaceEntry(entries);
     } else {
-      alert(`${newNumber} has already been added to the phonebook!`);
+      displayNotification(
+        `${newNumber} has already been added to your contacts!`, "error"
+      );
     }
   }
 
@@ -95,11 +112,15 @@ export default function App() {
           const updatedEntries = entries.filter((entry) => 
             entry.id !== entryToDelete.id);
           setEntries(updatedEntries);
+          displayNotification(
+            `Successfully deleted ${entryToDelete.name} from your contacts.`, 
+            "success"
+          );
         })
         .catch(() => {
-          alert(
+          displayNotification(
             `Unable to delete ${entryToDelete.name} - perhaps this contact has` 
-            + ' already been deleted?'
+            + ' already been deleted?', "error"
           );
         });
     }
@@ -109,6 +130,9 @@ export default function App() {
     <div>
       <div>
         <h1>Phonebook</h1>
+      </div>
+      <div>
+        <Notification notification={notification}/>
       </div>
       <div>
         <h2>Search for an entry by name</h2>
