@@ -55,14 +55,11 @@ export default function App() {
         setEntries(entries.map((entry) => 
           entry.id !== oldEntry.id ? entry : returnedEntry));
         displayNotification(
-          `Successfully replaced ${newName}'s number.`, "success"
+          `Successfully replaced ${newName}'s number.`, 'success'
         );
       })
       .catch(() => {
-        displayNotification(
-          `Unable to replace ${newName}'s number - perhaps this contact has ` +
-          'been deleted?', "error"
-        );
+        displayNotification(`Unable to replace ${newName}'s number.`, 'error');
       });
     } else {
       clearFields();
@@ -77,21 +74,23 @@ export default function App() {
         name: newName,
         number: newNumber
       };
-      setEntries(entries.concat(entryObject));
       entryService
         .create(entryObject)
-        .then(returnedEntry => {
+        .then((returnedEntry) => {
           setEntries(entries.concat(returnedEntry));
           clearFields();
           displayNotification(
-            `Successfully added ${newName} to your contacts.`, "success"
-          );
+            `Successfully added ${newName} to your contacts.`, 'success'
+          )
+        })
+        .catch((error) => {
+          displayNotification(error.response.data.error, 'error')
         });
     } else if (entries.some((entry) => entry.name === newName)) {
       replaceEntry(entries);
     } else {
       displayNotification(
-        `${newNumber} has already been added to your contacts!`, "error"
+        `${newNumber} has already been added to your contacts!`, 'error'
       );
     }
   }
@@ -114,13 +113,13 @@ export default function App() {
           setEntries(updatedEntries);
           displayNotification(
             `Successfully deleted ${entryToDelete.name} from your contacts.`, 
-            "success"
+            'success'
           );
         })
         .catch(() => {
           displayNotification(
             `Unable to delete ${entryToDelete.name} - perhaps this contact has` 
-            + ' already been deleted?', "error"
+            + ' already been deleted?', 'error'
           );
         });
     }
