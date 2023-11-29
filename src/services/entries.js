@@ -4,17 +4,17 @@ const baseURL = '/api/entries';
 
 const create = (newObject) => {
   const request = axios.post(baseURL, newObject);
-  return request.then(response => response.data);
+  return request.then((response) => response.data);
 };
 
 const read = () => {
   const request = axios.get(baseURL);
-  return request.then(response => response.data);
+  return request.then((response) => response.data);
 };
 
 const update = (id, entry) => {
   const request = axios.put(`${baseURL}/${id}`, entry);
-  return request.then(response => response.data);
+  return request.then((response) => response.data);
 };
 
 const destroy = (id) => {
