@@ -1,3 +1,4 @@
+import { Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 import Entry from './Entry';
@@ -5,8 +6,7 @@ import Entry from './Entry';
 export default function SearchForm({ results, handleSearchChange }) {
   return (
     <>
-      <label htmlFor="search">Search: </label>
-      <input id="search" onChange={handleSearchChange}></input>
+      <Form.Control id="search" onChange={handleSearchChange}></Form.Control>
       <ul>
         {results ? results.map((result) => 
           <Entry key={result.name} entry={result} />): ''}

@@ -1,7 +1,12 @@
+import { Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 export default function DeleteButton({ deleteEntry, entry }) {
-  return <button onClick={() => deleteEntry(entry)}>Delete</button>;
+  return (
+    <Button variant="danger" onClick={() => deleteEntry(entry)}>
+      Delete
+    </Button>
+  );
 }
 
 DeleteButton.propTypes = {

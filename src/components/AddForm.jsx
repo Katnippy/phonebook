@@ -1,23 +1,24 @@
+import { Form, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 export default function AddForm({ addEntry, newName, handleNameChange, 
                                   newNumber, handleNumberChange }) {
   return (
     <>
-      <form onSubmit={addEntry}>
-        <div>
-          <label htmlFor="name">Name: </label>
-          <input id="name" value={newName} onChange={handleNameChange}>
-          </input>
-          <br />
-          <label htmlFor="number">Number: </label>
-          <input id="number" value={newNumber} onChange={handleNumberChange}>
-          </input>
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <Form onSubmit={addEntry}>
+        <Form.Group>
+          <Form.Label htmlFor="name">Name: </Form.Label>
+          <Form.Control id="name" value={newName} onChange={handleNameChange}>
+          </Form.Control>
+        </Form.Group>
+        <Form.Group>
+          <Form.Label htmlFor="number">Number: </Form.Label>
+          <Form.Control id="number" value={newNumber} 
+            onChange={handleNumberChange}>
+          </Form.Control>
+        </Form.Group>
+        <Button variant="primary" type="submit">Add</Button>
+      </Form>
     </>
   );
 }
