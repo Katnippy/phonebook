@@ -126,7 +126,7 @@ export default function App() {
   };
 
   return (
-    <div>
+    <div className="container">
       <div>
         <h1>Yellow Penguins</h1>
       </div>

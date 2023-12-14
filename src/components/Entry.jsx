@@ -4,11 +4,19 @@ import DeleteButton from "./DeleteButton";
 
 export default function Entry({ entry, deleteEntry }) {
   return (
-    <li>
-      {entry.name} - {entry.number}
-      &nbsp;
-      <DeleteButton deleteEntry={deleteEntry} entry={entry} />
-    </li>
+    <>
+      <tr key={entry.id}>
+        <td>
+          {entry.name}
+        </td>
+        <td>
+          {entry.number}
+        </td>
+        <td>
+          <DeleteButton deleteEntry={deleteEntry} entry={entry} />
+        </td>
+      </tr>
+    </>
   );
 }
 
