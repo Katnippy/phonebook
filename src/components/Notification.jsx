@@ -1,16 +1,12 @@
+import { Alert } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 import './Notification.css';
 
 export default function Notification({ notification: { message, style }}) {
-  // ? If notification === null?
-  if (message === null) {
-    return null;
-  }
-
   return (
-    <div className={style}>
-      <h2>{message}</h2>
+    <div>
+      {message && <Alert variant={style}>{message}</Alert>}
     </div>
   );
 }

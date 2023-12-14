@@ -59,7 +59,7 @@ export default function App() {
         );
       })
       .catch(() => {
-        displayNotification(`Unable to replace ${newName}'s number.`, 'error');
+        displayNotification(`Unable to replace ${newName}'s number.`, 'danger');
       });
     } else {
       clearFields();
@@ -84,13 +84,13 @@ export default function App() {
           )
         })
         .catch((error) => {
-          displayNotification(error.response.data.error, 'error')
+          displayNotification(error.response.data.error, 'danger')
         });
     } else if (entries.some((entry) => entry.name === newName)) {
       replaceEntry(entries);
     } else {
       displayNotification(
-        `${newNumber} has already been added to the phonebook!`, 'error'
+        `${newNumber} has already been added to the phonebook!`, 'danger'
       );
     }
   }
@@ -119,7 +119,7 @@ export default function App() {
         .catch(() => {
           displayNotification(
             `Unable to delete ${entryToDelete.name} - perhaps this entry has` 
-            + ' already been deleted?', 'error'
+            + ' already been deleted?', 'danger'
           );
         });
     }
