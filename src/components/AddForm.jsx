@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 export default function AddForm({ addEntry, newName, handleNameChange, 
                                   newNumber, handleNumberChange }) {
   return (
@@ -19,3 +21,11 @@ export default function AddForm({ addEntry, newName, handleNameChange,
     </>
   );
 }
+
+AddForm.propTypes = {
+  addEntry: PropTypes.func.isRequired,
+  newName: PropTypes.string.isRequired,
+  handleNameChange: PropTypes.func.isRequired,
+  newNumber: PropTypes.string.isRequired,
+  handleNumberChange: PropTypes.func.isRequired,
+};

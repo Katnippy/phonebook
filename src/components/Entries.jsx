@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import Entry from './Entry';
 
 export default function Entries( { entries, deleteEntry }) {
@@ -8,3 +10,8 @@ export default function Entries( { entries, deleteEntry }) {
     </ul>
   );
 }
+
+Entries.propTypes = {
+  entries: PropTypes.array.isRequired,
+  deleteEntry: PropTypes.func.isRequired,
+};

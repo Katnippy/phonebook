@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import Entry from './Entry';
 
 export default function SearchForm({ results, handleSearchChange }) {
@@ -12,3 +14,8 @@ export default function SearchForm({ results, handleSearchChange }) {
     </>
   );
 }
+
+SearchForm.propTypes = {
+  results: PropTypes.string.isRequired,
+  handleSearchChange: PropTypes.func.isRequired,
+};

@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import './Notification.css';
 
 export default function Notification({ notification: { message, style }}) {
@@ -12,3 +14,10 @@ export default function Notification({ notification: { message, style }}) {
     </div>
   );
 }
+
+Notification.propTypes = {
+  notification: PropTypes.shape({
+    message: PropTypes.string,
+    style: PropTypes.string,
+  }),
+};

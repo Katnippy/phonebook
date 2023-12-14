@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import DeleteButton from "./DeleteButton";
 
 export default function Entry({ entry, deleteEntry }) {
@@ -9,3 +11,8 @@ export default function Entry({ entry, deleteEntry }) {
     </li>
   );
 }
+
+Entry.propTypes = {
+  entry: PropTypes.object.isRequired,
+  deleteEntry: PropTypes.func.isRequired,
+};
