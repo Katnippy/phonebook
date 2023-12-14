@@ -44,7 +44,7 @@ export default function App() {
 
   function replaceEntry() {
     if (
-      window.confirm(`${newName} has already been added to your contacts - ` + 
+      window.confirm(`${newName} has already been added to the phonebook - ` + 
       'replace their old number with a new one?')
     ) {
     const oldEntry = entries.find((entry) => entry.name === newName);
@@ -80,7 +80,7 @@ export default function App() {
           setEntries(entries.concat(returnedEntry));
           clearFields();
           displayNotification(
-            `Successfully added ${newName} to your contacts.`, 'success'
+            `Successfully added ${newName} to the phonebook.`, 'success'
           )
         })
         .catch((error) => {
@@ -90,7 +90,7 @@ export default function App() {
       replaceEntry(entries);
     } else {
       displayNotification(
-        `${newNumber} has already been added to your contacts!`, 'error'
+        `${newNumber} has already been added to the phonebook!`, 'error'
       );
     }
   }
@@ -104,7 +104,7 @@ export default function App() {
   }
 
   const deleteEntry = (entryToDelete) => {
-    if (window.confirm(`Delete ${entryToDelete.name} from your contacts?`)) {
+    if (window.confirm(`Delete ${entryToDelete.name} from the phonebook?`)) {
       entryService
         .destroy(entryToDelete.id)
         .then(() => {
@@ -112,13 +112,13 @@ export default function App() {
             entry.id !== entryToDelete.id);
           setEntries(updatedEntries);
           displayNotification(
-            `Successfully deleted ${entryToDelete.name} from your contacts.`, 
+            `Successfully deleted ${entryToDelete.name} from the phonebook.`, 
             'success'
           );
         })
         .catch(() => {
           displayNotification(
-            `Unable to delete ${entryToDelete.name} - perhaps this contact has` 
+            `Unable to delete ${entryToDelete.name} - perhaps this entry has` 
             + ' already been deleted?', 'error'
           );
         });
@@ -128,7 +128,7 @@ export default function App() {
   return (
     <div>
       <div>
-        <h1>Phonebook</h1>
+        <h1>Yellow Penguins</h1>
       </div>
       <div>
         <Notification notification={notification}/>
@@ -144,7 +144,7 @@ export default function App() {
             handleNumberChange={handleNumberChange} />
       </div>
       <div>
-        <h2>Numbers</h2>
+        <h2>Entries</h2>
         <Entries entries={entries} deleteEntry={deleteEntry} />
       </div>
     </div>
