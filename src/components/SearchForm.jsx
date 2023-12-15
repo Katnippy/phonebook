@@ -1,7 +1,7 @@
-import { Col, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
-import Entry from './Entry';
+import Entries from './Entries';
 
 export default function SearchForm({ results, handleSearchChange }) {
   return (
@@ -9,10 +9,7 @@ export default function SearchForm({ results, handleSearchChange }) {
       <div id="search-box">
         <Form.Control id="search" onChange={handleSearchChange}></Form.Control>
       </div>
-      <ul>
-        {results ? results.map((result) => 
-          <Entry key={result.name} entry={result} />): ''}
-      </ul>
+      <div>{results ? <Entries entries={results} /> : ''}</div>
     </>
   );
 }
