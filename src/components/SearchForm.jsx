@@ -1,4 +1,4 @@
-import { Form } from 'react-bootstrap';
+import { Col, Form } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 import Entry from './Entry';
@@ -6,7 +6,9 @@ import Entry from './Entry';
 export default function SearchForm({ results, handleSearchChange }) {
   return (
     <>
-      <Form.Control id="search" onChange={handleSearchChange}></Form.Control>
+      <div id="search-box">
+        <Form.Control id="search" onChange={handleSearchChange}></Form.Control>
+      </div>
       <ul>
         {results ? results.map((result) => 
           <Entry key={result.name} entry={result} />): ''}

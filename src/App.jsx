@@ -127,23 +127,28 @@ export default function App() {
 
   return (
     <div className="container">
-      <div>
-        <h1>Yellow Penguins</h1>
+      <div class="my-4 d-flex justify-content-center align-items-center">
+        <img src="../images/yellow-penguins.png" 
+          id="yellow-penguins"
+          alt="A parody of the Yellow Pages logo - with Tux, the penguin mascot
+          of Linux, in place of the two fingers leafing over a spread-open
+          phonebook."></img>
+        <h1 class="display-4 mt-2">Yellow Penguins</h1>
       </div>
       <div>
         <Notification notification={notification}/>
       </div>
-      <div>
+      <div class="my-4">
         <h2>Search for an entry by name</h2>
         <SearchForm results={results} handleSearchChange={handleSearchChange} />
       </div>
-      <div>
+      <div class="my-4">
         <h2>Add an entry</h2>
         <AddForm addEntry={addEntry} newName={newName} 
           handleNameChange={handleNameChange} newNumber={newNumber} 
             handleNumberChange={handleNumberChange} />
       </div>
-      <div>
+      <div class="my-4">
         <h2>Entries</h2>
         <Entries entries={entries} deleteEntry={deleteEntry} />
       </div>
