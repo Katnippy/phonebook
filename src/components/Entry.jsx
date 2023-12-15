@@ -6,13 +6,13 @@ export default function Entry({ entry, deleteEntry }) {
   return (
     <>
       <tr key={entry.id}>
-        <td>
+        <td class="align-middle">
           {entry.name}
         </td>
-        <td>
+        <td class="align-middle">
           {entry.number}
         </td>
-        <td>
+        <td class="align-middle">
           <DeleteButton deleteEntry={deleteEntry} entry={entry} />
         </td>
       </tr>
